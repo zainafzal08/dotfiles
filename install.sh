@@ -30,8 +30,9 @@ deps=(
   starship
   # Neovim + chad neovim for code editing
   neovim
+  # Hotkey daemon
+  koekeishiya/formulae/skhd
 )
-
 for dep in ${deps[@]}; do
   brew install $dep
 done
@@ -51,8 +52,8 @@ pug get tmux github: willhbr/vim-tmux-navigator
 # Npm
 curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
 sudo npm install -g n
-sudo npm install -g typescript-language-server typescript vscode-htmlservice
+sudo npm install -g typescript-language-server typescript
+sudo npm i -g vscode-langservers-extracted
 
-echo "Get correct sketchbar font: kvndrsslr/sketchybar-app-font"
 echo "Reccomended Terminal: https://wezfurlong.org/wezterm/index.html"
 echo "Reccomended Tiler: https://github.com/koekeishiya/yabai"

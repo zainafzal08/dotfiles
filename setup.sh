@@ -57,4 +57,3 @@ link wezterm/.wezterm.lua ~/.wezterm.lua
 link vim/vimrc ~/.vimrc
 
 link dircolors ~/.dircolors
-
