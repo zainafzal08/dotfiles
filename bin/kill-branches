@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for branch in `git branch | grep -v '*' | grep -v 'main'`; do
+    read -r -p "Delete ${branch}? [y/N] " response
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+    then
+      git branch -D $branch
+    fi
+done
