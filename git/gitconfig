@@ -10,6 +10,7 @@
 [alias]
   new = "!git checkout -b "
   home = "!git checkout main && git pull"
+	co = "!git checkout "
   xl = "!git log origin/$(git mainbranch)~1..HEAD"
   amend = commit -a --amend --no-edit
 [difftool "sourcetree"]
