@@ -1,5 +1,0 @@
-if [ -n "$BASH" ]; then
-  exec bash -l
-else
-  exec "$SHELL" -l
-fi

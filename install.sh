@@ -2,6 +2,17 @@
 
 set -e
 
+link() {
+  local path="$current/$1"
+  local dest="$2"
+  mkdir -p "$(dirname "$dest")"
+  if [ -L "$dest" ]; then
+    rm "$dest"
+  fi
+  echo "$dest -> $path"
+  ln -fs "$path" "$dest"
+}
+
 if ! command -v brew &> /dev/null
 then
   echo "Brew not installed. Installing it..."
@@ -22,16 +33,10 @@ deps=(
   eza
   # Ls but print a tree.
   tree
-  # Grep but recursively searched all files. Use with rr.
-  ripgrep
   # Smarter cd
   zoxide
   # Sexy prompt
   starship
-  # Neovim + chad neovim for code editing
-  neovim
-  # Hotkey daemon
-  koekeishiya/formulae/skhd
 )
 for dep in ${deps[@]}; do
   brew install $dep
@@ -41,13 +46,10 @@ if ! [[ "$SHELL" = *zsh ]]; then
   chsh -s "$(which zsh)"
 fi
 
-# ZSH
+# ZSH - install
 pug get zsh github: zsh-users/zsh-autosuggestions
 pug get zsh github: zsh-users/zsh-syntax-highlighting
 
-# Tmux
-pug get tmux github: catppuccin/tmux
-pug get tmux github: willhbr/vim-tmux-navigator
 
 # Npm
 curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
@@ -55,5 +57,12 @@ sudo npm install -g n
 sudo npm install -g typescript-language-server typescript
 sudo npm i -g vscode-langservers-extracted
 
-echo "Reccomended Terminal: https://wezfurlong.org/wezterm/index.html"
-echo "Reccomended Tiler: https://github.com/koekeishiya/yabai"
+# Link all the config.
+mkdir -p ~/.config && touch ~/.config/starship.toml
+link bin ~/bin
+link .zshrc ~/.zshrc
+link .gitconfig ~/.gitconfig
+link .wezterm.lua ~/.wezterm.lua
+link .vimrc ~/.vimrc
+link dircolors ~/.dircolors
+link .tmux.conf ~/.config/.tmux.conf
