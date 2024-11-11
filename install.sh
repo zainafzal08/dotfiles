@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+current="$PWD"
 
 link() {
   local path="$current/$1"
@@ -25,6 +26,8 @@ deps=(
   vim
   zsh
   git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   # Fast fuzzy search.
   fzf
   # Traverse, query, filter and process json files.
@@ -39,30 +42,23 @@ deps=(
   starship
 )
 for dep in ${deps[@]}; do
-  brew install $dep
+  brew list $dep > /dev/null|| brew install $dep
 done
 
 if ! [[ "$SHELL" = *zsh ]]; then
   chsh -s "$(which zsh)"
 fi
 
-# ZSH - install
-pug get zsh github: zsh-users/zsh-autosuggestions
-pug get zsh github: zsh-users/zsh-syntax-highlighting
-
-
-# Npm
-curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
-sudo npm install -g n
-sudo npm install -g typescript-language-server typescript
-sudo npm i -g vscode-langservers-extracted
-
 # Link all the config.
-mkdir -p ~/.config && touch ~/.config/starship.toml
+[ -d ~/.config ] || mkdir ~/.config
+link starship.toml ~/.config/starship.toml
 link bin ~/bin
-link .zshrc ~/.zshrc
-link .gitconfig ~/.gitconfig
-link .wezterm.lua ~/.wezterm.lua
+link zshrc ~/.zshrc
+link gitconfig ~/.gitconfig
+link wezterm.lua ~/.wezterm.lua
 link .vimrc ~/.vimrc
 link dircolors ~/.dircolors
 link .tmux.conf ~/.config/.tmux.conf
+link alias.sh ~/alias.sh
+
+echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc

@@ -1,0 +1,10 @@
+[user]
+	name = Zain Afzal
+	email = zain.afz@gmail.com
+	username = zainafzal08
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+  autoSetupRemote = true
