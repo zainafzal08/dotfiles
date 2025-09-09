@@ -34,4 +34,6 @@ if which starship > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+autoload -U compinit
+compinit
+source <(jj util completion zsh)

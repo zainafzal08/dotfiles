@@ -28,3 +28,4 @@ if which z > /dev/null 2>&1; then
   alias cd=zoxide
 fi
 
+alias cat="bat"

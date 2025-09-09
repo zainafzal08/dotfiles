@@ -1,0 +1,22 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Zain Afzal"
+email = "zain.afz@gmail.com"
+
+[ui]
+conflict-marker-style = "git"
+
+[aliases]
+up = ["git", "push", "--change", "@"]
+drop = ["abandon"]
+l = ["log"]
+e = ["edit"]
+sync = ["util", "exec", "--", "bash", "-c", """
+jj git fetch;
+jj rebase -s 'all:roots(master..@)' -d master;
+""", ""]
+see = ["util", "exec", "--", "bash", "-c", """
+jj git fetch;
+jj bookmark track $1@origin;
+""", ""]
