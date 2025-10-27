@@ -40,6 +40,8 @@ deps=(
   zoxide
   # Sexy prompt
   starship
+  # git but better
+  jj
 )
 for dep in ${deps[@]}; do
   brew list $dep > /dev/null|| brew install $dep
