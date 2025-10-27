@@ -34,6 +34,8 @@ deps=(
   jq
   # Ls but better. ls gets auto mapped to this in alias.sh
   eza
+  # cat but better
+  bat
   # Ls but print a tree.
   tree
   # Smarter cd
